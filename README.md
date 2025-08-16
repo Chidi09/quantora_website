@@ -1,12 +1,90 @@
-# React + Vite
+ # Quantora Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ A modern, full-stack web application for Quantora, built with React, Firebase, and Tailwind CSS. This project features a dynamic team/services showcase, admin authentication, and a beautiful, responsive UI.
 
-Currently, two official plugins are available:
+ ## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+ - **Dynamic Services & Team**: Data-driven sections for services and team members, editable via Firestore.
+ - **Admin Authentication**: Secure login/logout for admin users (Firebase Auth).
+ - **Theme Toggle**: Light/dark mode with smooth transitions.
+ - **Animated Intro**: Engaging intro animation using Framer Motion.
+ - **Contact Form**: Integrated with Formspree for easy messaging.
+ - **Responsive Design**: Mobile-first, works on all devices.
 
-## Expanding the ESLint configuration
+ ## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+ - [React](https://react.dev/)
+ - [Firebase (Auth & Firestore)](https://firebase.google.com/)
+ - [Tailwind CSS](https://tailwindcss.com/)
+ - [Framer Motion](https://www.framer.com/motion/)
+ - [Vite](https://vitejs.dev/)
+
+ ## Getting Started
+
+ ### Prerequisites
+ - Node.js (v16+ recommended)
+ - npm
+
+ ### Installation
+
+ 1. **Clone the repository:**
+	 ```bash
+	 git clone https://github.com/your-username/quantora-website.git
+	 cd quantora-website
+	 ```
+ 2. **Install dependencies:**
+	 ```bash
+	 npm install
+	 ```
+ 3. **Configure Firebase:**
+	 - Update `src/firebase.js` with your Firebase project credentials.
+	 - Set up Firestore rules as needed.
+
+ 4. **(Optional) Populate Firestore with initial data:**
+	 ```bash
+	 node scripts/setupFirestore.js
+	 ```
+
+ 5. **Start the development server:**
+	 ```bash
+	 npm run dev
+	 ```
+	 Visit [http://localhost:5173](http://localhost:5173) to view the app.
+
+ ## Project Structure
+
+ ```
+ quantora-website/
+ ├── public/
+ ├── src/
+ │   ├── components/
+ │   ├── context/
+ │   ├── data/
+ │   ├── App.jsx
+ │   ├── firebase.js
+ │   └── ...
+ ├── scripts/
+ ├── package.json
+ ├── tailwind.config.js
+ ├── vite.config.js
+ └── ...
+ ```
+
+ ## Customization
+ - **Services & Team:** Edit `src/data/initial-data.js` or update Firestore directly.
+ - **Site Config:** Edit `src/data/siteConfig.js` for nav links, titles, and contact info.
+ - **Styling:** Tweak Tailwind classes or extend the config as needed.
+
+ ## Deployment
+ You can deploy this app to Vercel, Netlify, or Firebase Hosting. Build with:
+ ```bash
+ npm run build
+ ```
+ Then follow your host's deployment instructions.
+
+ ## License
+ MIT
+
+ ---
+
+ **Quantora** © 2025. Built with passion by the Quantora team.
