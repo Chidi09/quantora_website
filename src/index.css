@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,900;1,400&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -27,9 +27,9 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: #000000; /* Pure Black for contrast */
+  color: #E0E0E0; /* Metallic Silver Text */
+  overflow-x: hidden;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -42,19 +42,10 @@ body {
   scrollbar-width: none;  /* Firefox */
 }
 
-/* Custom Scrollbar for that "High Tech" feel */
+/* Hide scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #000;
-}
-::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  width: 0px;
+  background: transparent;
 }
 
 /* Enable smooth scrolling for anchor links */
