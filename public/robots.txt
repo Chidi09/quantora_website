@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://quantora.dev/sitemap.xml
+Sitemap: https://quantora-website.vercel.app/sitemap.xml
