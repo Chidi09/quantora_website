@@ -1,54 +1,56 @@
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { FaTimes } from 'react-icons/fa';
 import CoderProfile from '../themes/CoderProfile';
 import WriterProfile from '../themes/WriterProfile';
 import CreativeProfile from '../themes/CreativeProfile';
 
 const TeamMemberModal = ({ member, onClose }) => {
-  // Determine which profile layout to use
-  const renderProfile = () => {
-    switch (member.roleType) {
-      case 'coder':
-        return <CoderProfile member={member} />;
-      case 'writer':
-        return <WriterProfile member={member} />;
-      case 'creative':
-        return <CreativeProfile member={member} />;
-      default:
-        // Default fallback (uses Coder for now or a generic one)
-        return <CoderProfile member={member} />;
-    }
-  };
+  // Logic to determine which profile to show
+  let ProfileComponent;
+  
+  if (member.roleType === 'coder') {
+    ProfileComponent = CoderProfile;
+  } else if (member.roleType === 'writer') {
+    ProfileComponent = WriterProfile;
+  } else if (member.roleType === 'creative') {
+    ProfileComponent = CreativeProfile;
+  } else {
+    // Fallback
+    ProfileComponent = CoderProfile;
+  }
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }} 
-      animate={{ opacity: 1 }} 
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[60] bg-black/90 backdrop-blur-xl flex items-center justify-center p-4 md:p-8"
-      onClick={onClose}
-    >
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+      {/* Backdrop */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+        className="absolute inset-0 bg-black/90 backdrop-blur-lg"
+      />
+
+      {/* Modal Content */}
       <motion.div
-        initial={{ scale: 0.9, y: 20 }}
-        animate={{ scale: 1, y: 0 }}
-        exit={{ scale: 0.9, y: 20 }}
-        onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-6xl h-[90vh] overflow-y-auto rounded-xl shadow-2xl no-scrollbar"
+        initial={{ scale: 0.9, y: 50, opacity: 0 }}
+        animate={{ scale: 1, y: 0, opacity: 1 }}
+        exit={{ scale: 0.9, y: 50, opacity: 0 }}
+        className="relative w-full max-w-6xl h-[90vh] rounded-xl overflow-hidden shadow-2xl z-10"
       >
-        {/* Close Button - Sticky to corner */}
         <button 
-          onClick={onClose} 
-          className="absolute top-4 right-4 z-50 bg-black/50 hover:bg-red-600 text-white p-2 rounded-full transition-colors backdrop-blur-md border border-white/10"
+          onClick={onClose}
+          className="absolute top-6 right-6 z-50 p-2 bg-black/50 text-white rounded-full hover:bg-red-600 transition-colors border border-white/20"
         >
           <FaTimes size={20} />
         </button>
 
-        {/* Render the Specific Themed Profile */}
-        {renderProfile()}
-        
+        {/* Render the specific theme */}
+        <div className="h-full overflow-y-auto no-scrollbar">
+           <ProfileComponent member={member} />
+        </div>
       </motion.div>
-    </motion.div>
+    </div>
   );
 };
 

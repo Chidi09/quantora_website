@@ -1,104 +1,94 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaTerminal, FaGithub, FaExternalLinkAlt, FaCode } from 'react-icons/fa';
+import { FaTerminal, FaCode, FaLaptopCode, FaExternalLinkAlt } from 'react-icons/fa';
 
 const CoderProfile = ({ member }) => {
   return (
-    <div className="font-mono bg-[#0d1117] text-gray-300 min-h-full rounded-lg overflow-hidden border border-gray-800 shadow-2xl">
-      {/* VS Code-like Header */}
-      <div className="bg-[#161b22] p-2 flex items-center border-b border-gray-800">
-        <div className="flex space-x-2 px-2">
-          <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-          <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-          <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+    <div className="min-h-full bg-[#0D1117] text-[#C9D1D9] font-mono">
+      {/* VS Code Toolbar */}
+      <div className="flex items-center justify-between px-4 py-2 bg-[#161B22] border-b border-[#30363D]">
+        <div className="flex space-x-2">
+          <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
+          <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
+          <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
         </div>
-        <div className="ml-4 text-xs text-gray-500 flex space-x-4">
-          <span className="bg-[#0d1117] px-3 py-1 rounded-t-md border-t border-l border-r border-gray-800 text-blue-400">
-            {member.name.replace(/\s+/g, '_').toLowerCase()}.jsx
-          </span>
-          <span className="px-3 py-1">package.json</span>
-        </div>
+        <div className="text-xs text-[#8B949E]">{member.name.replace(/\s+/g, '_').toLowerCase()}.tsx</div>
+        <div className="w-10" />
       </div>
 
-      <div className="p-6 md:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
-        {/* Left Sidebar / Line Numbers */}
-        <div className="lg:col-span-4 flex flex-col items-center lg:items-start border-r border-gray-800 pr-6">
-           <motion.div 
-             initial={{ scale: 0 }} animate={{ scale: 1 }}
-             className="w-40 h-40 rounded-full border-2 border-green-500/50 p-1 mb-6"
-           >
-             <img src={member.avatar} alt={member.name} className="w-full h-full rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
-           </motion.div>
-           
-           <h1 className="text-2xl font-bold text-white mb-2"><span className="text-blue-400">const</span> {member.name}</h1>
-           <p className="text-green-400 mb-6 text-sm flex items-center gap-2">
-             <FaTerminal size={12} /> {member.role}
-           </p>
+      <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[calc(90vh-40px)]">
+        {/* Sidebar Info */}
+        <div className="lg:col-span-4 p-8 border-r border-[#30363D] bg-[#0D1117]">
+          <div className="mb-8 relative group">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity" />
+            <img 
+              src={member.avatar} 
+              alt={member.name}
+              className="relative w-48 h-48 rounded-full object-cover mx-auto border-4 border-[#30363D]"
+            />
+          </div>
+          
+          <h1 className="text-3xl font-bold text-white mb-2 text-center">{member.name}</h1>
+          <p className="text-[#58A6FF] text-center mb-6 text-sm flex justify-center items-center gap-2">
+            <FaTerminal /> {member.role}
+          </p>
 
-           <div className="w-full bg-[#161b22] p-4 rounded-lg text-sm mb-6">
-             <p className="text-gray-500 mb-2">// Contact Info</p>
-             <p><span className="text-purple-400">email:</span> "{member.email}"</p>
-             <p><span className="text-purple-400">location:</span> "{member.location || 'Remote'}"</p>
-           </div>
-           
-           <div className="flex flex-wrap gap-2">
-              {member.techStack && member.techStack.map((tech, i) => (
-                <span key={i} className="px-2 py-1 text-xs bg-blue-900/30 text-blue-300 rounded border border-blue-900/50">
-                  {tech}
-                </span>
-              ))}
-           </div>
+          <div className="space-y-4 text-sm">
+            <div className="bg-[#161B22] p-4 rounded border border-[#30363D]">
+              <span className="text-[#FF7B72]">const</span> <span className="text-[#D2A8FF]">techStack</span> = [
+              <div className="flex flex-wrap gap-2 mt-2 pl-4">
+                {member.techStack?.map((tech, i) => (
+                  <span key={i} className="text-[#A5D6FF]">' {tech} ',</span>
+                ))}
+              </div>
+              ];
+            </div>
+            
+            <div className="bg-[#161B22] p-4 rounded border border-[#30363D]">
+               <span className="text-[#79C0FF]">location:</span> <span className="text-[#A5D6FF]">"{member.location || 'Remote'}"</span>
+            </div>
+          </div>
         </div>
 
-        {/* Main Code Area */}
-        <div className="lg:col-span-8">
-           <div className="mb-8">
-             <h2 className="text-xl text-white mb-4 flex items-center gap-2">
-               <span className="text-yellow-500">function</span> <span className="text-purple-400">AboutMe</span>() {'{'}
-             </h2>
-             <p className="pl-6 text-gray-400 leading-relaxed border-l-2 border-gray-800 ml-2">
-               {member.bio}
-             </p>
-             <p className="mt-2 text-white">{'}'}</p>
-           </div>
+        {/* Main Content */}
+        <div className="lg:col-span-8 p-8 overflow-y-auto">
+          <div className="mb-10">
+            <h2 className="text-xl font-bold mb-4 flex items-center gap-2 text-white">
+              <span className="text-[#FF7B72]">function</span> <span className="text-[#D2A8FF]">About</span>()
+            </h2>
+            <p className="text-[#8B949E] leading-relaxed pl-6 border-l-2 border-[#30363D]">
+              {member.bio}
+            </p>
+          </div>
 
-           {member.projects && (
-             <div>
-               <h2 className="text-xl text-white mb-6 flex items-center gap-2">
-                 <span className="text-yellow-500">const</span> <span className="text-blue-400">SelectedWorks</span> = [
-               </h2>
-               
-               <div className="space-y-4 pl-4">
-                 {member.projects.map((project, idx) => (
-                   <motion.div 
-                     key={idx}
-                     initial={{ x: 20, opacity: 0 }}
-                     whileInView={{ x: 0, opacity: 1 }}
-                     transition={{ delay: idx * 0.1 }}
-                     className="group bg-[#161b22] p-4 rounded-md border border-gray-800 hover:border-green-500/50 transition-colors cursor-pointer relative overflow-hidden"
-                   >
-                     <div className="absolute top-0 right-0 p-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <FaExternalLinkAlt className="text-green-400" />
-                     </div>
-                     <h3 className="text-lg font-bold text-white group-hover:text-green-400 transition-colors">
-                       {project.title}
-                     </h3>
-                     <p className="text-xs text-blue-400 mb-2">{project.category}</p>
-                     <p className="text-sm text-gray-400 mb-3">{project.desc}</p>
-                     <div className="flex gap-2 text-xs font-mono text-gray-500">
-                       {project.stack && project.stack.map(s => <span key={s}>#{s}</span>)}
-                     </div>
-                   </motion.div>
-                 ))}
-               </div>
-               <p className="mt-4 text-white">];</p>
-             </div>
-           )}
+          <div>
+            <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-white">
+              <span className="text-[#FF7B72]">const</span> <span className="text-[#79C0FF]">Projects</span> = 
+            </h2>
+            <div className="grid gap-4 pl-4">
+              {member.projects?.map((project, idx) => (
+                <motion.div 
+                  key={idx}
+                  initial={{ x: 20, opacity: 0 }}
+                  whileInView={{ x: 0, opacity: 1 }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="bg-[#161B22] p-5 rounded border border-[#30363D] hover:border-[#58A6FF] transition-all group cursor-pointer"
+                >
+                  <div className="flex justify-between items-start">
+                    <h3 className="text-[#D2A8FF] font-bold text-lg">{project.title}</h3>
+                    <FaExternalLinkAlt className="text-[#8B949E] group-hover:text-white" />
+                  </div>
+                  <p className="text-[#8B949E] text-sm mt-1 mb-3">{project.desc}</p>
+                  <div className="flex gap-3 text-xs font-mono text-[#58A6FF]">
+                    {project.stack?.map(s => <span key={s}>#{s}</span>)}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 };
-
 export default CoderProfile;

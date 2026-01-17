@@ -5,16 +5,41 @@
   --font-sans: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --font-serif: 'Playfair Display', serif;
-  
-  --color-quantora-black: #050505;
-  --color-quantora-silver: #E0E0E0;
-  --color-quantora-grey: #2A2A2A;
+}
+
+/* Force dark mode metallic theme as default */
+:root {
+  --bg-primary: #ffffff;
+  --text-primary: #1a1a1a;
+  --accent-silver: #555555;
+  --card-bg: #f5f5f5;
+  --border-color: #e5e5e5;
+}
+
+/* When .dark class is added to html tag */
+.dark {
+  --bg-primary: #050505;
+  --text-primary: #E0E0E0;
+  --accent-silver: #A3A3A3;
+  --card-bg: #0F0F0F;
+  --border-color: #2A2A2A;
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-quantora-black);
-  color: var(--color-quantora-silver);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 /* Custom Scrollbar for that "High Tech" feel */

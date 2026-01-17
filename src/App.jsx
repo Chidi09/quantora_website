@@ -5,6 +5,7 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { collection, getDocs } from 'firebase/firestore';
+import { HelmetProvider } from 'react-helmet-async'; // IMPORT THIS
 import { db } from './firebase';
 import { AuthProvider } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
@@ -17,14 +18,17 @@ import ServiceSection from './components/services/ServiceSection';
 import TeamMemberModal from './components/services/TeamMemberModal';
 import ContactSection from './components/ContactSection';
 import AdminLogin from './components/admin/AdminLogin';
+import SEO from './components/SEO'; // IMPORT THIS
 import { siteConfig } from './data/siteConfig'; // Named import, not default
 export default function App() {
   return (
-    <ThemeProvider>
-      <AuthProvider>
-        <QuantoraSite />
-      </AuthProvider>
-    </ThemeProvider>
+    <HelmetProvider> {/* WRAP HERE */}
+      <ThemeProvider>
+        <AuthProvider>
+          <QuantoraSite />
+        </AuthProvider>
+      </ThemeProvider>
+    </HelmetProvider>
   );
 }
 
@@ -84,6 +88,17 @@ function QuantoraSite() {
 
   return (
     <>
+      <SEO /> {/* DEFAULT SEO TAGS */}
+      
+      {/* If a member is selected, we can dynamically update the page title for them! */}
+      {selectedMember && (
+        <SEO 
+          title={`${selectedMember.name} - ${selectedMember.role}`}
+          description={selectedMember.bio.substring(0, 160)}
+          image={selectedMember.avatar}
+        />
+      )}
+
       <LabyrinthIntro onAnimationComplete={handleAnimationComplete} />
       <AnimatePresence>
         {introComplete && (
@@ -108,7 +123,6 @@ function QuantoraSite() {
                 <TeamMemberModal
                   member={selectedMember}
                   onClose={handleCloseModal}
-                  // Pass the global Formspree ID to the modal
                   formspreeId={siteConfig.formspreeId}
                 />
               )}
